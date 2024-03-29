@@ -5,10 +5,8 @@ start_sha=$1
 end_sha=$2
 
 # 从commitlint.config.js导入rules变量
-rules=$(node -e "console.log(require('../commitlint.config.js').rules['type-enum'].join('|'))")
+rules=$(node -e "console.log(require('./commitlint.config.js').rules['type-enum'][2].join('|'))")
 
-# 从commitlint.config.js导入rules变量
-rules=$(node -e "console.log(require('../commitlint.config.js').rules['type-enum'].join('|'))")
 
 # 输出规则
 echo "Rules: $rules"
