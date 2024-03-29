@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # 获取两个参数：起始SHA和结束SHA
 start_sha=$1
