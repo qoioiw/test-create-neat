@@ -1,9 +1,27 @@
-#!/bin/sh
-
+#!/bin/bash
+ 
 # 获取两个参数：起始SHA和结束SHA
 start_sha=$1
 end_sha=$2
 
+<<<<<<< HEAD
+=======
+file_path="../commitlint.config.js"
+
+# 检查文件是否存在
+if [ -f "$file_path" ]; then
+    echo "文件已找到：$file_path"
+    # 在这里执行文件相关的操作
+else
+    echo "文件未找到：$file_path"
+fi
+
+# 从commitlint.config.js导入rules变量
+rules=$(node -e "console.log(require('../commitlint.config.js').rules['type-enum'].join('|'))")
+
+echo "Rules: $rules"
+
+>>>>>>> 75a8bcdea6386ed31735094de14c1ebebf527247
 # 设置颜色变量
 RED='\033[0;31m'
 BLUE='\033[0;34m'
@@ -29,8 +47,14 @@ echo "Rules: $rules"
 check_commit_message() {
     commit_msg="$1"
     # 检查提交信息是否以指定的前缀开头
+<<<<<<< HEAD
     if ! echo "$commit_msg" | grep -qE "$rules"; then
         echo -e "${RED}Error:${NC} Commit message format is incorrect. It should start with one of '${BLUE}feat|fix|docs|style|refactor|test|chore|ci:${NC}'." >&2
+=======
+    # 使用外部文件的规则进行匹配检查
+    if ! echo "$commit_msg" | grep -qE "^($rules):"; then
+        echo -e "${RED}Error:${NC} Commit message format is incorrect. It should start with one of '${BLUE}$rules:${NC}'." >&2
+>>>>>>> 75a8bcdea6386ed31735094de14c1ebebf527247
         exit 1
     fi
 }
