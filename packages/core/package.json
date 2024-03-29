@@ -1,0 +1,58 @@
+{
+  "name": "create-neat",
+  "version": "1.0.6",
+  "author": "Moment",
+  "description": "Zero configuration to quickly create your application",
+  "license": "MIT",
+  "homepage": "https://github.com/xun082/create-neat",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/xun082/create-neat/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xun082/create-neat.git",
+    "directory": "packages/core"
+  },
+  "bin": {
+    "create-neat": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc -w"
+  },
+  "files": [
+    "dist/**/*",
+    "template/**/*"
+  ],
+  "keywords": [
+    "react",
+    "vue",
+    "webpack",
+    "rollup",
+    "cli",
+    "ts"
+  ],
+  "dependencies": {
+    "@clack/prompts": "^0.7.0",
+    "@laconic/utils": "workspace:*",
+    "axios": "^1.6.7",
+    "boxen": "^5.0.0",
+    "chalk": "^4.0.0",
+    "commander": "^12.0.0",
+    "fs-extra": "^11.2.0",
+    "minimist": "^1.2.8",
+    "ora": "^5.4.1",
+    "tar": "^6.2.0"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^11.0.4",
+    "@types/minimist": "^1.2.5",
+    "@types/node": "^20.11.22",
+    "@types/tar": "^6.1.11"
+  },
+  "engines": {
+    "node": ">=14.0.0",
+    "npm": ">=6.0.0"
+  }
+}
