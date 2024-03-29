@@ -35,7 +35,7 @@ check_commit_message() {
     # 检查提交信息是否以指定的前缀开头
     # 使用外部文件的规则进行匹配检查
     if ! echo "$commit_msg" | grep -qE "^($formatted_values):"; then
-        echo -e "${RED}Error:${NC} Commit message format is incorrect. It should start with one of '${BLUE}$rules:${NC}'." >&2
+        echo -e "${RED}Error:${NC} Commit message format is incorrect. It should start with one of '${BLUE}$formatted_values:${NC}'." >&2
         exit 1
     fi
 }
