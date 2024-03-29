@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# 参数验证
+if [ "$#" -ne 2 ]; then
+    echo "Usage: $0 <start_sha> <end_sha>"
+    exit 1
+fi
+
 # 获取两个参数：起始SHA和结束SHA
 start_sha=$1
 end_sha=$2
