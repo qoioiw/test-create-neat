@@ -7,6 +7,12 @@ end_sha=$2
 # 从commitlint.config.js导入rules变量
 rules=$(node -e "console.log(require('../commitlint.config.js').rules['type-enum'].join('|'))")
 
+# 从commitlint.config.js导入rules变量
+rules=$(node -e "console.log(require('../commitlint.config.js').rules['type-enum'].join('|'))")
+
+# 输出规则
+echo "Rules: $rules"
+
 # 设置颜色变量
 RED='\033[0;31m'
 BLUE='\033[0;34m'
