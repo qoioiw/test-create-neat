@@ -21,7 +21,7 @@ else
 fi
 
 # 从commitlint.config.js导入rules变量
-rules=$(node -e "console.log(require('../commitlint.config.js').rules['type-enum'].join('|'))")
+rules=$(node -e "console.log(require('../commitlint.config.js').rules['type-enum'])")
 
 echo "Rules: $rules"
 
