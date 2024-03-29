@@ -14,19 +14,19 @@ NC='\033[0m' # No Color
 
 # 定义提交信息规范函数
 check_commit_message() {
-    commit_msg="$1"
-    # 检查提交信息是否以指定的前缀开头
-    # 使用外部文件的规则进行匹配检查
-    if ! echo "$commit_msg" | grep -qE "^($rules):"; then
-        echo -e "${RED}Error:${NC} Commit message format is incorrect. It should start with one of '${BLUE}$rules:${NC}'." >&2
-        exit 1
-    fi
+      commit_msg="$1"
+      # 检查提交信息是否以指定的前缀开头
+      # 使用外部文件的规则进行匹配检查
+      if ! echo "$commit_msg" | grep -qE "^($rules):"; then
+            echo -e "${RED}Error:${NC} Commit message format is incorrect. It should start with one of '${BLUE}$rules:${NC}'." >&2
+            exit 1
+      fi
 }
 
 # 遍历从start_sha到end_sha的所有提交
 for sha in $(git rev-list $start_sha..$end_sha); do
-    commit_msg=$(git show --format=%B -s $sha)
-    check_commit_message "$commit_msg"
+      commit_msg=$(git show --format=%B -s $sha)
+      check_commit_message "$commit_msg"
 done
 
 echo -e "${BLUE}Commit message check passed.${NC}\n"
