@@ -1,29 +1,24 @@
-#!/bin/sh
+#!/bin/bash
 
 # 获取两个参数：起始SHA和结束SHA
 start_sha=$1
 end_sha=$2
 
 # 从commitlint.config.js导入rules变量
-rules=$(node -e "console.log(require('./commitlint.config.js').rules['type-enum'])")
+rules=$(node -p "require('./commitlint.config.js').rules['type-enum']")
 
-# 解构规则数组
-if [ "$rules" ]; then
-    level=$(echo "$rules" | jq -r '.[0]')
-    applicable=$(echo "$rules" | jq -r '.[1]')
-    values=$(echo "$rules" | jq -r '.[2] | join("|")')
-
-    # 检查规则是否符合预期
-    if [ "$applicable" = "always" ] && [ "$values" ]; then
-        echo "Rules: $values"
-    else
-        echo "Invalid rules configuration"
-        exit 1
-    fi
-else
-    echo "Rules not found or invalid"
+# 检查规则是否成功获取
+if [ -z "$rules" ]; then
+    echo "Failed to load rules from commitlint.config.js"
     exit 1
 fi
+
+# 格式化规则
+values=$(echo "$rules" | tr -d '[],' | sed 's/\"//g' | tr '\n' '|')
+values="${values%|}"  # 移除最后一个管道符号
+
+# 输出规则
+echo "Rules: $values"
 
 # 设置颜色变量
 RED='\033[0;31m'
