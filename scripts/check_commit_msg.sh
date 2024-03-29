@@ -5,7 +5,7 @@ start_sha=$1
 end_sha=$2
 
 # 从commitlint.config.js导入rules变量
-rules=$(node -p "require('./commitlint.config.js').rules['type-enum']")
+rules=$(node -p "require('./commitlint.config.js').rules['type-enum'][2]")
 
 # 检查规则是否成功获取
 if [ -z "$rules" ]; then
@@ -13,7 +13,7 @@ if [ -z "$rules" ]; then
     exit 1
 fi
 
-# 格式化规则
+# 将规则转换为 Bash 能够理解的格式
 values=$(echo "$rules" | tr -d '[],' | sed 's/\"//g' | tr '\n' '|')
 values="${values%|}"  # 移除最后一个管道符号
 
