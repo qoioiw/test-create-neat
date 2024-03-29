@@ -5,11 +5,25 @@ start_sha=$1
 end_sha=$2
 
 # 从commitlint.config.js导入rules变量
-rules=$(node -e "console.log(require('./commitlint.config.js').rules['type-enum'][2].join('|'))")
+rules=$(node -e "console.log(require('./commitlint.config.js').rules['type-enum'])")
 
+# 解构规则数组
+if [ "$rules" ]; then
+    level=$(echo "$rules" | jq -r '.[0]')
+    applicable=$(echo "$rules" | jq -r '.[1]')
+    values=$(echo "$rules" | jq -r '.[2] | join("|")')
 
-# 输出规则
-echo "Rules: $rules"
+    # 检查规则是否符合预期
+    if [ "$applicable" = "always" ] && [ "$values" ]; then
+        echo "Rules: $values"
+    else
+        echo "Invalid rules configuration"
+        exit 1
+    fi
+else
+    echo "Rules not found or invalid"
+    exit 1
+fi
 
 # 设置颜色变量
 RED='\033[0;31m'
@@ -21,8 +35,8 @@ check_commit_message() {
     commit_msg="$1"
     # 检查提交信息是否以指定的前缀开头
     # 使用外部文件的规则进行匹配检查
-    if ! echo "$commit_msg" | grep -qE "^($rules):"; then
-        echo -e "${RED}Error:${NC} Commit message format is incorrect. It should start with one of '${BLUE}$rules:${NC}'." >&2
+    if ! echo "$commit_msg" | grep -qE "^($values):"; then
+        echo -e "${RED}Error:${NC} Commit message format is incorrect. It should start with one of '${BLUE}$values:${NC}'." >&2
         exit 1
     fi
 }
