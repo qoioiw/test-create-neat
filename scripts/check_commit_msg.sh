@@ -4,8 +4,20 @@
 start_sha=$1
 end_sha=$2
 
+file_path="../commitlint.config.js"
+
+# 检查文件是否存在
+if [ -f "$file_path" ]; then
+    echo "文件已找到：$file_path"
+    # 在这里执行文件相关的操作
+else
+    echo "文件未找到：$file_path"
+fi
+
 # 从commitlint.config.js导入rules变量
-rules=$(node -e "console.log(require('./commitlint.config.js').rules['type-enum'].join('|'))")
+rules=$(node -e "console.log(require('../commitlint.config.js').rules['type-enum'].join('|'))")
+
+echo "Rules: $rules"
 
 # 设置颜色变量
 RED='\033[0;31m'
