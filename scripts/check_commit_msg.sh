@@ -15,7 +15,7 @@ if [ "$rules" ]; then
 
     # 检查规则是否满足条件
     if [ "$applicable" = "always" ] && [ "$values" ]; then
-        echo "$values"
+        formatted_values="$values"
     fi
 fi
 
