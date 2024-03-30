@@ -10,7 +10,7 @@ BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
 # 使用相对路径指定文件位置
-file_path="../commitlint.config.js"
+file_path="./commitlint.config.js"
 
 # 检查文件是否存在
 if [ -f "$file_path" ]; then
@@ -21,7 +21,7 @@ else
 fi
 
 # 从commitlint.config.js导入rules变量
-rules=$(node -e "console.log(require('../commitlint.config.js').rules['type-enum'].join('|'))")
+rules=$(node -e "console.log(require('./commitlint.config.js').rules['type-enum'].join('|'))")
 
 echo "Rules: $rules"
 
